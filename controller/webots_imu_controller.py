@@ -1,6 +1,5 @@
 from imu_controller_interface import ImuControllerInterface
 from webots_imu_hw import WebotsIMUHW
-from webots_ros2_core.webots_node import WebotsNode
 from controller import Accelerometer, InertialUnit, Gyro
 
 

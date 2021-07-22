@@ -1,9 +1,5 @@
-import rclpy
-from rclpy.node import Node
-
-class HWInterface(Node):
+class HWInterface:
     def __init__(self, name):
-        super().__init__(name)
         self._name = name
         self._status = 'disabled'
 
@@ -16,8 +12,8 @@ class HWInterface(Node):
     def stop(self):
         raise NotImplementedError
 
-    #def get_name(self):
-    #    return self._name
+    def get_name(self):
+        return self._name
 
     def get_status(self):
         return self._status
