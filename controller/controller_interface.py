@@ -1,9 +1,5 @@
-import rclpy
-from rclpy.node import Node
-
-class ControllerInterface(Node):
+class ControllerInterface:
     def __init__(self, name):
-        super().__init__(name)
         self.hw_list = {}
 
     def step(self):
@@ -17,5 +13,5 @@ class ControllerInterface(Node):
         pass
 
     def _add_interface(self, hw):
-        self.hw_list[hw.get_name] = hw
+        self.hw_list[hw.get_name()] = hw
 

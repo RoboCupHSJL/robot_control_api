@@ -1,15 +1,14 @@
 from sensor_interface import SensorInterface
 from sensor_msgs.msg import Imu
 from webots_ros2_core.math.interpolation import interpolate_lookup_table
-import rclpy
 
 
 class IMUSensorInterface(SensorInterface):
     def __init__(self, name) -> None:
         super().__init__(name)
         self._frame_id = self._name
-        self.__publisher = self.create_publisher(Imu, 'imu_sensor', 1)
-        self.__current_imu = None
+        #self.__publisher = self.create_publisher(Imu, 'imu_sensor', 1)
+        self._current_imu = None
 
     def _get_orientation(self):
         pass
@@ -22,7 +21,8 @@ class IMUSensorInterface(SensorInterface):
 
     def publish(self):
         msg = self.read()
-        self.__publisher.publish(msg)
+        self._current_imu = msg
+        #self.__publisher.publish(msg)
 
 
     def read(self):
