@@ -8,8 +8,10 @@ class WebotsPositionController(PositionControllerInterface):
 
         self.robot = robot
 
-        self._add_interface(WebotsServoHW('head_yaw', robot))
+        for servo_name in self._servo_id_list:
+            self._add_interface(WebotsServoHW(servo_name, robot))
+
+        #self._add_interface(WebotsServoHW('head_yaw', robot))
 
     def step(self):
         super().step()
-        self.hw_list['head_yaw'].write(1.0)

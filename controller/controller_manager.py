@@ -8,6 +8,7 @@ class ControllerManager:
 
         self.controllers = {}
         if type == 'Webots':
+            self.robot = robot
             self.__init_webots(robot)
 
     def __init_webots(self, robot): 
@@ -20,4 +21,5 @@ class ControllerManager:
 
     def start(self):
         while True:
+            self.robot.step(100)
             self._step()
