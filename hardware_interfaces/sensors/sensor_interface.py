@@ -1,8 +1,14 @@
-from hw_interface import HWInterface
+# TODO: add docs
+from abc import abstractmethod
+from hardware_interfaces import HardwareInterface
 
-class SensorInterface(HWInterface):
-    def __init__(self, name):
-        super().__init__(name)
 
+class SensorInterface:
+    """[summary]
+    """
+    __metaclass__ = HardwareInterface
+
+    @abstractmethod
     def read(self):
-        pass
+        """[summary]
+        """
