@@ -1,43 +1,41 @@
-from sensor_msgs.msg import Imu
+# TODO: add docs
+# TODO: add config read
+import logging
 from imu_sensor_interface import IMUSensorInterface
-from controller import Accelerometer, InertialUnit, Gyro
+from controller import InertialUnit
 
-class WebotsIMUHW(IMUSensorInterface):
+
+class WebotsIMU(IMUSensorInterface):
+    """[summary]
+
+    Args:
+        IMUSensorInterface ([type]): [description]
+    """
+
     def __init__(self, name, robot):
         super().__init__(name)
-        print(self._current_imu)
         self.robot = robot
 
-        self.__accel = None
-        self.__gyro = None
-        self.__in_unit = InertialUnit('imu')
+        self.__in_unit = InertialUnit(self.name)
         self.__in_unit.enable(100)
+
+    def get_param(self, param_name):
+        pass
 
     def start(self):
         try:
             self.__in_unit.enable()
-        except:
-            self._status = 'disabled'
-            return
+            self.__status = 'enabled'
+        except Exception as start_exception:
+            self.__status = 'disabled'
+            logging.error(start_exception)
 
-        self._status = 'enabled'
+        self.__status = 'enabled'
 
     def _get_orientation(self):
-        if self.__in_unit:
-            return self.__in_unit.getQuaternion()
+        orientation = None
+        if self.__status == 'enabled':
+            orientation = self.__in_unit.getRollPitchYaw()
         else:
-            return None
-
-
-    def _get_linear_accleration(self):
-        if self.__accel:
-            return self.__accel.getValues()
-        else:
-            return None
-        
-
-    def _get_angular_velocity(self):
-        if self.__gyro:
-            return self.__gyro.getValues()
-        else:
-            return None
+            logging.error("IMU is not started")
+        return orientation

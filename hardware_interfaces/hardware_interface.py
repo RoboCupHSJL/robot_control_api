@@ -3,15 +3,17 @@ from abc import ABCMeta, abstractmethod
 
 
 class HardwareInterface:
-    __metaclass__ = ABCMeta
     """[summary]
     """
+    __metaclass__ = ABCMeta
+
     def __init__(self, name):
 
         """[summary]
         """
-        self._name = name
-        self._status = 'disabled'
+        self.__name = name
+        self.__interface_type = type(self)
+        self.__status = 'disabled'
 
     @abstractmethod
     def get_param(self, param_name):
@@ -35,7 +37,7 @@ class HardwareInterface:
         Returns:
             [type]: [description]
         """
-        return self._name
+        return self.__name
 
     @property
     def status(self):
@@ -44,4 +46,22 @@ class HardwareInterface:
         Returns:
             [type]: [description]
         """
-        return self._status
+        return self.__status
+
+    @status.setter
+    def status(self, status):
+        """[summary]
+
+        Returns:
+            [type]: [description]
+        """
+        self.__status = status
+
+    @property
+    def interface_type(self):
+        """[summary]
+
+        Returns:
+            [type]: [description]
+        """
+        return self.__interface_type
