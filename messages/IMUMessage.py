@@ -62,7 +62,7 @@ class IMUMessage:
     @timestamp.setter
     def timestamp(self, timestamp):
         try:
-            assert isinstance(timestamp, int, float)
+            assert isinstance(timestamp, (int, float))
             self.__timestamp = timestamp
         except AssertionError as assertion:
             logging.error("timestamp value must be an int or float")

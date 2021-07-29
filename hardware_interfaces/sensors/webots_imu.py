@@ -17,14 +17,13 @@ class WebotsIMU(IMUSensorInterface):
         self.robot = robot
 
         self.__in_unit = InertialUnit(self.name)
-        self.__in_unit.enable(100)
 
     def get_param(self, param_name):
         pass
 
     def start(self):
         try:
-            self.__in_unit.enable()
+            self.__in_unit.enable(100)
             self.__status = 'enabled'
         except Exception as start_exception:
             self.__status = 'disabled'
