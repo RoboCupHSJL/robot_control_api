@@ -164,13 +164,25 @@ class SampleGameStateReceiver(GameStateReceiver):
 class ThreadedGameStateReceiver(GameStateReceiver):
     def __init__(self, team, player, is_goalkeeper, addr=(DEFAULT_LISTENING_HOST, GAME_CONTROLLER_LISTEN_PORT), answer_port=GAME_CONTROLLER_ANSWER_PORT):
         super().__init__(team, player, is_goalkeeper, addr=addr, answer_port=answer_port)
+        self.receive_thread = None
+
+    def start(self):
+        assert self.receive_thread == None, 'Attempting to start ThreadedGameStateReceiver which is already started'
         self.receive_thread = threading.Thread(target=self.receive_forever)
         self.receive_thread.daemon=True # force the thread to terminate when the main process ends
         self.team_state = None
         self.player_state = None
-
-    def start(self):
+        self.running = True # allow receive_forever to work
         self.receive_thread.start()
+
+    def stop(self):
+        assert self.receive_thread != None, 'Attempting to stop ThreadedGameStateReceiver which is already stopped'
+        self.running = False # tell receive_forever to stop
+        self.receive_thread.join()
+        self.receive_thread = None # allow thead instance to be garbage collected
+        self.state = None
+        self.team_state = None
+        self.player_state = None
 
     def on_new_gamestate(self, state):
         for team in state['teams']:

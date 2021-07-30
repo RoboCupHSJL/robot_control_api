@@ -1,4 +1,5 @@
 from gcreceiver import ThreadedGameStateReceiver
+import msvcrt
 
 import time
 
@@ -19,11 +20,22 @@ receiver = ThreadedGameStateReceiver(team, player, is_goalkeeper)
 receiver.start() # Strat receiving and answering
 
 while True:
-    if receiver.team_state != None: # ask for a data any time you want, but don't forget to check for None in case of GC is not preset or any other connection error         
+    if receiver.state != None: # ask for a data any time you want, but don't forget to check for None in case of GC is not preset or any other connection error         
         receive_time = time.ctime(receiver.time)
+        print(f'\n----- Whole game state, received at {receive_time}:')
+        print(receiver.state)
         print(f'\n----- Whole team state, received at {receive_time}:')
         print(receiver.team_state)
-
         print(f'\n----- This player state, received at {receive_time}:')
         print(receiver.player_state)
+    else:
+        print('None')
+    if msvcrt.kbhit():
+        ch = msvcrt.getch()
+        if ch == b'e':
+            print('Calling stop()')
+            receiver.stop()
+        if ch == b'b':
+            print('Calling start()')
+            receiver.start()
     time.sleep(1)
