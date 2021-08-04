@@ -54,7 +54,6 @@ class IMUMessage(Message):
         self.__orientation = None
 
     @property
-<<<<<<< HEAD:messages/IMUMessage.py
     def timestamp(self):
         """[summary]
         """
@@ -71,8 +70,6 @@ class IMUMessage(Message):
                 from assertion
 
     @property
-=======
->>>>>>> 68931920a00e7aa3215d1f0ee8fc32e07e550d6e:messages/imu_message.py
     def orientation(self):
         """[summary]
         """
