@@ -1,3 +1,4 @@
 from .webots_camera_controller import WebotsCameraController
 from .webots_imu_controller import WebotsImuController
-from .webots_position_controller import WebotsPositionController
+#from .webots_position_controller import WebotsPositionController
+from .controller_interface import ControllerInterface

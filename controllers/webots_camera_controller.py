@@ -1,5 +1,5 @@
-from camera_controller_interface import CameraControllerInterface
-from hardware_interfaces import WebotsCamera
+from .camera_controller_interface import CameraControllerInterface
+from hardware_interfaces.sensors import WebotsCamera
 
 
 class WebotsCameraController(CameraControllerInterface):
@@ -8,7 +8,7 @@ class WebotsCameraController(CameraControllerInterface):
 
         self.robot = robot
 
-        self._add_interface(WebotsCamera(name='Webots_Camera', robot=robot))
+        self._add_interface(WebotsCamera(name='camera', robot=robot))
 
     def step(self):
         super().step()

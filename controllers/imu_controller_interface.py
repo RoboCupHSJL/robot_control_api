@@ -1,4 +1,4 @@
-from controller_interface import ControllerInterface
+from .controller_interface import ControllerInterface
 from sensor_msgs.msg import Imu
 
 class ImuControllerInterface(ControllerInterface):
@@ -14,4 +14,4 @@ class ImuControllerInterface(ControllerInterface):
     def step(self):
         super().step()
         for hw_name in self.hw_list:
-            self.hw_list[hw_name].publish()
+            print(self.hw_list[hw_name].read().orientation.pitch)

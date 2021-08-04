@@ -1,5 +1,5 @@
-from imu_controller_interface import ImuControllerInterface
-from hardware_interfaces import WebotsIMU
+from .imu_controller_interface import ImuControllerInterface
+from hardware_interfaces.sensors import WebotsIMU
 
 
 class WebotsImuController(ImuControllerInterface):
@@ -8,7 +8,7 @@ class WebotsImuController(ImuControllerInterface):
 
         self.robot = robot
 
-        self._add_interface(WebotsIMU(name='Webots_IMU', robot=robot))
+        self._add_interface(WebotsIMU(name='imu', robot=robot))
 
     def step(self):
         super().step()

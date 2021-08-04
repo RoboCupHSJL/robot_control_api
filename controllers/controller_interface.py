@@ -13,5 +13,5 @@ class ControllerInterface:
         pass
 
     def _add_interface(self, hw):
-        self.hw_list[hw.get_name()] = hw
+        self.hw_list[hw.name] = hw
 

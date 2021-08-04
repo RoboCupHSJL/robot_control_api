@@ -86,5 +86,5 @@ class IMUMessage:
             self.__orientation = args[0]
         elif len(args) == 3 and all([isinstance(args[i], float) for i in range(len(args))]):
             self.__orientation = self.Orientation(*args)
-        elif isinstance(args[0], list, tuple) and len(args) == 1:
+        elif isinstance(args[0], (list, tuple)) and len(args) == 1:
             self.__orientation = self.Orientation(*args[0])

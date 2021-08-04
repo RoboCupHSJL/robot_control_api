@@ -1,4 +1,4 @@
-from controller_interface import ControllerInterface
+from .controller_interface import ControllerInterface
 
 class CameraControllerInterface(ControllerInterface):
     def __init__(self, name):
@@ -13,4 +13,4 @@ class CameraControllerInterface(ControllerInterface):
     def step(self):
         super().step()
         for hw_name in self.hw_list:
-            self.hw_list[hw_name].publish()
+            self.hw_list[hw_name].read()

@@ -1,4 +1,4 @@
-from controllers import WebotsPositionController
+#from controllers import WebotsPositionController
 from controllers import WebotsImuController
 from controllers import WebotsCameraController
 
@@ -14,7 +14,7 @@ class ControllerManager:
 
     def __init_webots(self, robot): 
         self.controllers['imu'] = WebotsImuController('imu_controller', robot)
-        self.controllers['servos'] = WebotsPositionController('servos_controller', robot)
+        #self.controllers['servos'] = WebotsPositionController('servos_controller', robot)
         self.controllers['camera'] = WebotsCameraController('camera_controller', robot)
 
     def _step(self):
@@ -22,6 +22,8 @@ class ControllerManager:
             self.controllers[controller].step()
 
     def start(self):
+        for controller in self.controllers:
+            self.controllers[controller].start()
         while True:
             self.robot.step(100)
             self._step()

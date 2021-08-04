@@ -1,4 +1,6 @@
 import logging
+import numpy as np
+import cv2
 
 class ImageMessage:
     
@@ -70,6 +72,11 @@ class ImageMessage:
         Args:
             orientation ([type]): [description]
         """
-        assert isinstance(args[0], (tuple, list)) and \
-            len(args[0]) == self.__height and len(args[0][0]) == self.__width
+
+        tmp = np.array(args[0], dtype=float)
+        #tmp.reshape(self.__height, self.__width)
+        cv2.imshow('cam', tmp)
+
+        #assert isinstance(args[0], (tuple, list)) and \
+        #    len(args[0]) == self.__height and len(args[0][0]) == self.__width
         self.__data = args[0]
