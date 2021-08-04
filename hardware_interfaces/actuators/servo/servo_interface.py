@@ -1,32 +1,59 @@
-from actuator_interface import ActuatorInterface
-from std_msgs.msg import Float32
+# TODO: add docs
+from abc import abstractmethod
+from hardware_interfaces.actuators.actuator_interface import ActuatorInterface
+from messages import ServoMessage
 
-class ServoActuatorInterface(ActuatorInterface):
-    def __init__(self) -> None:
-        super().__init__()
-        self._frame_id = self._name
-        self.__publisher = self.create_publisher(Float32, 'servo', 1)
-        self.__current_position = None
 
+class ServoInterface(ActuatorInterface):
+    """[summary]
+    """
+
+    @abstractmethod
     def _get_position(self):
-        pass
+        """[summary]
+        """
 
-    def _set_position(self, msg):
-        pass
+    @abstractmethod
+    def _set_position(self, goal_position):
+        """[summary]
+        """
+
+    # TODO: add velocity and torque control
+    # @abstractmethod
+    # def _get_velocity(self):
+    #     """[summary]
+    #     """
+
+    # @abstractmethod
+    # def _set_velocity(self, goal_velocity):
+    #     """[summary]
+    #     """
+
+    # @abstractmethod
+    # def _get_torque(self):
+    #     """[summary]
+    #     """
+
+    # @abstractmethod
+    # def _set_torque(self, goal_torque):
+    #     """[summary]
+    #     """
 
     def read(self):
+        """[summary]
 
-        #msg = Float32()
+        Returns:
+            [type]: [description]
+        """
 
-        #msg.header.stamp = rclpy.now()
-        #msg.header.frame_id = self._frame_id
-        #msg.value = self._get_position()
-        print('I AM IN THE SERVO READ')
-        return None
+        message = ServoMessage()
+        message.position = self._get_position()
+        return message
 
-    def write(self, msg):
-        return self._set_position(msg)
+    def write(self, message: ServoMessage):
+        """[summary]
 
-    def publish(self):
-        msg = self.read()
-        self.__publisher.publish(msg)
+        Args:
+            data ([type]): [description]
+        """
+        self._set_position(message.position)
