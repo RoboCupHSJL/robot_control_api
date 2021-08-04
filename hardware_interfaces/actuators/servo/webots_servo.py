@@ -1,7 +1,13 @@
-from servo_actuator_interface import ServoActuatorInterface
+from servo_interface import ServoInterface
 from controller import PositionSensor, Motor
 
-class WebotsServoHW(ServoActuatorInterface):
+
+class WebotsServo(ServoInterface):
+    """[summary]
+
+    Args:
+        ServoInterface ([type]): [description]
+    """
     def __init__(self, name, robot):
         self._name = name
         self.robot = robot
@@ -9,7 +15,7 @@ class WebotsServoHW(ServoActuatorInterface):
         self.__position_sensor = PositionSensor(name + '_sensor')
         self.__position_sensor.enable(100)
         self.__motor = Motor(name)
-        
+
 
     def start(self):
         try:
