@@ -1,11 +1,26 @@
-from hw_interface import HWInterface
+# TODO: add docs
+from abc import abstractmethod
+from hardware_interfaces.hardware_interface import HardwareInterface
 
-class ActuatorInterface(HWInterface):
-    def __init__(self, name):
-        super().__init__(name)
 
+class ActuatorInterface(HardwareInterface):
+    """[summary]
+    """
+
+    @abstractmethod
     def read(self):
-        raise NotImplementedError
+        """[summary]
+        """
 
-    def write(self):
-        raise NotImplementedError
+    def write(self, message):
+        """[summary]
+
+        Args:
+            message ([type]): [description]
+        """
+
+    def start(self):
+        self.status = "enabled"
+
+    def stop(self):
+        self.status = "disabled"
