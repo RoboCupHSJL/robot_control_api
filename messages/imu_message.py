@@ -54,6 +54,22 @@ class IMUMessage(Message):
         self.__orientation = None
 
     @property
+    def timestamp(self):
+        """[summary]
+        """
+        return self.__timestamp
+
+    @timestamp.setter
+    def timestamp(self, timestamp):
+        try:
+            assert isinstance(timestamp, (int, float))
+            self.__timestamp = timestamp
+        except AssertionError as assertion:
+            logging.error("timestamp value must be an int or float")
+            raise Exception("timestamp value must be an int or float") \
+                from assertion
+
+    @property
     def orientation(self):
         """[summary]
         """
@@ -70,5 +86,5 @@ class IMUMessage(Message):
             self.__orientation = args[0]
         elif len(args) == 3 and all([isinstance(args[i], float) for i in range(len(args))]):
             self.__orientation = self.Orientation(*args)
-        elif isinstance(args[0], list, tuple) and len(args) == 1:
+        elif isinstance(args[0], (list, tuple)) and len(args) == 1:
             self.__orientation = self.Orientation(*args[0])
