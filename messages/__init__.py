@@ -1,1 +1,2 @@
-from .IMUMessage import IMUMessage
+from .imu_message import IMUMessage
+from .servo_message import ServoMessage

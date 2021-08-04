@@ -1,6 +1,6 @@
 # TODO: add docs
-import logging
 import math
+from .message import Message
 
 
 def euler_from_quaternion(x, y, z, w):
@@ -26,7 +26,7 @@ def euler_from_quaternion(x, y, z, w):
     return roll_x, pitch_y, yaw_z  # in radians
 
 
-class IMUMessage:
+class IMUMessage(Message):
     """[summary]
 
     Raises:
@@ -50,24 +50,8 @@ class IMUMessage:
                 self.yaw = args[2]
 
     def __init__(self):
-        self.__timestamp = None
+        super().__init__()
         self.__orientation = None
-
-    @property
-    def timestamp(self):
-        """[summary]
-        """
-        return self.__timestamp
-
-    @timestamp.setter
-    def timestamp(self, timestamp):
-        try:
-            assert isinstance(timestamp, int, float)
-            self.__timestamp = timestamp
-        except AssertionError as assertion:
-            logging.error("timestamp value must be an int or float")
-            raise Exception("timestamp value must be an int or float") \
-                from assertion
 
     @property
     def orientation(self):
