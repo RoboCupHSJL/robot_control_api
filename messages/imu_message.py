@@ -1,6 +1,6 @@
 # TODO: add docs
-import logging
 import math
+from .message import Message
 
 
 def euler_from_quaternion(x, y, z, w):
@@ -26,7 +26,7 @@ def euler_from_quaternion(x, y, z, w):
     return roll_x, pitch_y, yaw_z  # in radians
 
 
-class IMUMessage:
+class IMUMessage(Message):
     """[summary]
 
     Raises:
@@ -50,10 +50,11 @@ class IMUMessage:
                 self.yaw = args[2]
 
     def __init__(self):
-        self.__timestamp = None
+        super().__init__()
         self.__orientation = None
 
     @property
+<<<<<<< HEAD:messages/IMUMessage.py
     def timestamp(self):
         """[summary]
         """
@@ -70,6 +71,8 @@ class IMUMessage:
                 from assertion
 
     @property
+=======
+>>>>>>> 68931920a00e7aa3215d1f0ee8fc32e07e550d6e:messages/imu_message.py
     def orientation(self):
         """[summary]
         """
