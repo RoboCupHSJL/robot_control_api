@@ -1,0 +1,55 @@
+# TODO: add docs
+# TODO: add config read
+import logging
+from .camera_interface import CameraInterface
+from controller import Camera
+
+
+class WebotsCamera(CameraInterface):
+    """[summary]
+
+    Args:
+        CameraInterface ([type]): [description]
+    """
+
+    def __init__(self, name, robot):
+        super().__init__(name)
+        self.robot = robot
+
+        self.__wb_camera = Camera(self.name)
+    
+    def get_param(self, param_name):
+        if param_name == "height":
+            return self._get_height()
+
+    def start(self):
+        try:
+            self.__wb_camera.enable(100)
+            self.status = 'enabled'
+        except Exception as start_exception:
+            self.status = 'disabled'
+            logging.error(start_exception)
+
+    def _get_image(self):
+        image = None
+        if self.status == 'enabled':
+            image = self.__wb_camera.getImageArray()
+        else:
+            logging.error("Camera is not started")
+        return image
+
+    def _get_height(self):
+        height = None
+        if self.status == 'enabled':
+            height = self.__wb_camera.getHeight()
+        else:
+            logging.error("Camera is not started")
+        return height
+
+    def _get_width(self):
+        width = None
+        if self.status == 'enabled':
+            width = self.__wb_camera.getWidth()
+        else:
+            logging.error("Camera is not started")
+        return width

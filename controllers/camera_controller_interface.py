@@ -1,7 +1,6 @@
 from .controller_interface import ControllerInterface
-from sensor_msgs.msg import Imu
 
-class ImuControllerInterface(ControllerInterface):
+class CameraControllerInterface(ControllerInterface):
     def __init__(self, name):
         super().__init__(name)
 
@@ -14,4 +13,4 @@ class ImuControllerInterface(ControllerInterface):
     def step(self):
         super().step()
         for hw_name in self.hw_list:
-            print(self.hw_list[hw_name].read().orientation.pitch)
+            self.hw_list[hw_name].read()
