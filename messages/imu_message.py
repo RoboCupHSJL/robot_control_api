@@ -54,22 +54,6 @@ class IMUMessage(Message):
         self.__orientation = None
 
     @property
-    def timestamp(self):
-        """[summary]
-        """
-        return self.__timestamp
-
-    @timestamp.setter
-    def timestamp(self, timestamp):
-        try:
-            assert isinstance(timestamp, (int, float))
-            self.__timestamp = timestamp
-        except AssertionError as assertion:
-            logging.error("timestamp value must be an int or float")
-            raise Exception("timestamp value must be an int or float") \
-                from assertion
-
-    @property
     def orientation(self):
         """[summary]
         """

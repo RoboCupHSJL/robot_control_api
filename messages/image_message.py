@@ -1,34 +1,24 @@
 import logging
 import numpy as np
-import cv2
+from .message import Message
 
-class ImageMessage:
-    
+
+class ImageMessage(Message):
+    """[summary]
+
+    Args:
+        Message ([type]): [description]
+    """
 
     def __init__(self):
-        self.__timestamp = None
+        super().__init__()
         self.__data = None
         self.__height = None
         self.__width = None
+        self.__encoding = None
 
     @property
-    def timestamp(self):
-        """[summary]
-        """
-        return self.__timestamp
-
-    @timestamp.setter
-    def timestamp(self, timestamp):
-        try:
-            assert isinstance(timestamp, (int, float))
-            self.__timestamp = timestamp
-        except AssertionError as assertion:
-            logging.error("timestamp value must be an int or float")
-            raise Exception("timestamp value must be an int or float") \
-                from assertion
-
-    @property
-    def height(self):
+    def height(self) -> int:
         """[summary]
         """
         return self.__height
@@ -44,7 +34,7 @@ class ImageMessage:
                 from assertion
 
     @property
-    def width(self):
+    def width(self) -> int:
         """[summary]
         """
         return self.__width
@@ -60,7 +50,23 @@ class ImageMessage:
                 from assertion
 
     @property
-    def data(self):
+    def encoding(self) -> str:
+        """[summary]
+        """
+        return self.__encoding
+
+    @encoding.setter
+    def encoding(self, encoding):
+        try:
+            assert isinstance(encoding, str)
+            self.__encoding = encoding
+        except AssertionError as assertion:
+            logging.error("width value must be an str")
+            raise Exception("width value must be an str") \
+                from assertion
+
+    @property
+    def data(self) -> np.array:
         """[summary]
         """
         return self.__data
@@ -72,11 +78,4 @@ class ImageMessage:
         Args:
             orientation ([type]): [description]
         """
-
-        tmp = np.array(args[0], dtype=float)
-        #tmp.reshape(self.__height, self.__width)
-        cv2.imshow('cam', tmp)
-
-        #assert isinstance(args[0], (tuple, list)) and \
-        #    len(args[0]) == self.__height and len(args[0][0]) == self.__width
-        self.__data = args[0]
+        self.__data = np.array(args[0], dtype=float)
