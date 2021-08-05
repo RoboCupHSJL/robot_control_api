@@ -1,4 +1,5 @@
-#from controllers import WebotsPositionController
+# TODO: add docs
+# from controllers import WebotsPositionController
 from controllers import WebotsImuController
 from controllers import WebotsCameraController
 
