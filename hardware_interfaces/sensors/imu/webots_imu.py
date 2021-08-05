@@ -1,7 +1,7 @@
 # TODO: add docs
 # TODO: add config read
 import logging
-from .imu_sensor_interface import IMUSensorInterface
+from imu_interface import IMUSensorInterface
 from controller import InertialUnit
 
 

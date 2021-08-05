@@ -1,7 +1,7 @@
 # TODO: add docs
 # TODO: add config read
 import logging
-from .camera_interface import CameraInterface
+from camera_interface import CameraInterface
 from controller import Camera
 
 
@@ -17,10 +17,16 @@ class WebotsCamera(CameraInterface):
         self.robot = robot
 
         self.__wb_camera = Camera(self.name)
-    
+
     def get_param(self, param_name):
+        result = None
         if param_name == "height":
-            return self._get_height()
+            result = self._get_height()
+        elif param_name == "width":
+            result = self._get_width()
+        elif param_name == "encoding":
+            result = self._get_encoding()
+        return result
 
     def start(self):
         try:
@@ -53,3 +59,6 @@ class WebotsCamera(CameraInterface):
         else:
             logging.error("Camera is not started")
         return width
+
+    def _get_encoding(self):
+        return "bgra8"

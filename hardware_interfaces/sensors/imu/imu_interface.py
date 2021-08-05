@@ -1,6 +1,6 @@
 # TODO: add docs
 from abc import abstractmethod
-from .sensor_interface import SensorInterface
+from hardware_interfaces.sensors.sensor_interface import SensorInterface
 from messages import IMUMessage
 
 

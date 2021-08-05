@@ -1,7 +1,8 @@
 # TODO: add docs
 from abc import abstractmethod
-from .sensor_interface import SensorInterface
+from hardware_interfaces.sensors.sensor_interface import SensorInterface
 from messages import ImageMessage
+
 
 class CameraInterface(SensorInterface):
     """[summary]
@@ -11,7 +12,7 @@ class CameraInterface(SensorInterface):
     def _get_image(self):
         """[summary]
         """
-        
+
     @abstractmethod
     def _get_height(self):
         """[summary]
@@ -19,6 +20,11 @@ class CameraInterface(SensorInterface):
 
     @abstractmethod
     def _get_width(self):
+        """[summary]
+        """
+
+    @abstractmethod
+    def _get_encoding(self):
         """[summary]
         """
 
@@ -31,16 +37,14 @@ class CameraInterface(SensorInterface):
 
         msg = ImageMessage()
         image = self._get_image()
-        print(image)
 
-        if image is None:
-            return
+        if image is not None:
 
-        msg.height = self._get_height()
-        msg.width = self._get_width()
-        #msg.is_bigendian = False
-        #msg.step = self._get_width() * 4
-        msg.data = image
-        #msg.encoding = 'bgra8'
+            msg.height = self._get_height()
+            msg.width = self._get_width()
+            # msg.is_bigendian = False
+            # msg.step = self._get_width() * 4
+            msg.data = image
+            msg.encoding = self._get_encoding()
 
         return msg
