@@ -1,17 +1,15 @@
-from .controller_interface import ControllerInterface
-from sensor_msgs.msg import Imu
+# TODO: add docs
+from controllers import ControllerInterface
+
 
 class ImuControllerInterface(ControllerInterface):
-    def __init__(self, name):
-        super().__init__(name)
+    """[summary]
 
-    def _read(self, msg_type):
-        pass
-
-    def start(self):
-        super().start()
-
+    Args:
+        ControllerInterface ([type]): [description]
+    """
     def step(self):
-        super().step()
-        for hw_name in self.hw_list:
-            print(self.hw_list[hw_name].read().orientation.pitch)
+        """[summary]
+        """
+        for imu in self.hardware_interfaces.values():
+            imu.read()

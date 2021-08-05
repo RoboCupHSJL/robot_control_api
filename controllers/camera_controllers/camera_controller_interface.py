@@ -1,16 +1,15 @@
-from .controller_interface import ControllerInterface
+# TODO: add docs
+from controllers import ControllerInterface
+
 
 class CameraControllerInterface(ControllerInterface):
-    def __init__(self, name):
-        super().__init__(name)
+    """[summary]
 
-    def _read(self, msg_type):
-        pass
-
-    def start(self):
-        super().start()
-
+    Args:
+        ControllerInterface ([type]): [description]
+    """
     def step(self):
-        super().step()
-        for hw_name in self.hw_list:
-            self.hw_list[hw_name].read()
+        """[summary]
+        """
+        for camera in self.hardware_interfaces.values():
+            camera.read()
