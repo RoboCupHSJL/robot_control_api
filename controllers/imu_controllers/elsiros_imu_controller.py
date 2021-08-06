@@ -1,9 +1,9 @@
 # TODO: add docs
 from .imu_controller_interface import ImuControllerInterface
-from hardware_interfaces.sensors import WebotsIMU
+from hardware_interfaces.sensors import ElsirosIMU
 
 
-class WebotsImuController(ImuControllerInterface):
+class ElsirosImuController(ImuControllerInterface):
     """[summary]
 
     Args:
@@ -14,4 +14,4 @@ class WebotsImuController(ImuControllerInterface):
 
         self.robot = robot
 
-        self._add_interface(WebotsIMU(name='imu', robot=robot))
+        self._add_interface(ElsirosIMU(name='imu', robot=robot))

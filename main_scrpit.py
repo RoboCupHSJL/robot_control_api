@@ -3,8 +3,8 @@ from controller import Robot
 
 
 kondo_webots_cm = ControllerManager(case='Webots', robot=Robot())
-# kondo_webots_cm.controllers['servos'].set_position('head_yaw', -0.5)
-# kondo_webots_cm.controllers['servos'].set_position('head_pitch', 1.0)
+kondo_webots_cm.controllers['servos'].set_position('head_yaw', -0.5)
+kondo_webots_cm.controllers['servos'].set_position('head_pitch', 0.5)
 
 kondo_webots_cm.start()
 

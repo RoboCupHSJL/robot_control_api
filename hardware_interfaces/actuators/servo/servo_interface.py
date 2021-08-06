@@ -50,10 +50,10 @@ class ServoInterface(ActuatorInterface):
         message.position = self._get_position()
         return message
 
-    def write(self, message: ServoMessage):
+    def write(self, position):
         """[summary]
 
         Args:
             data ([type]): [description]
         """
-        self._set_position(message.position)
+        self._set_position(position)

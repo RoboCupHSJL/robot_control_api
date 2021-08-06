@@ -12,8 +12,7 @@ class WebotsServo(ServoInterface):
     """
     def __init__(self, name, robot):
         super().__init__(name)
-        self._name = name
-        self.robot = robot
+        self.__robot = robot
         self.__position_sensor = PositionSensor(name + '_sensor')
         self.__position_sensor.enable(100)
         self.__motor = Motor(name)
