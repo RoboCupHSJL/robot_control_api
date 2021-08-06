@@ -2,10 +2,9 @@
 # TODO: add config read
 import logging
 from .camera_interface import CameraInterface
-from controller import Camera
 
 
-class WebotsCamera(CameraInterface):
+class ElsirosCamera(CameraInterface):
     """[summary]
 
     Args:
@@ -16,7 +15,6 @@ class WebotsCamera(CameraInterface):
         super().__init__(name)
         self.robot = robot
 
-        self.__wb_camera = Camera(self.name)
 
     def get_param(self, param_name):
         result = None
@@ -30,7 +28,7 @@ class WebotsCamera(CameraInterface):
 
     def start(self):
         try:
-            self.__wb_camera.enable(100)
+            self.robot.camera.enable(100)
             self.status = 'enabled'
         except Exception as start_exception:
             self.status = 'disabled'
@@ -39,7 +37,7 @@ class WebotsCamera(CameraInterface):
     def _get_image(self):
         image = None
         if self.status == 'enabled':
-            image = self.__wb_camera.getImageArray()
+            image = self.robot.camera.getImage()
         else:
             logging.error("Camera is not started")
         return image
@@ -47,7 +45,7 @@ class WebotsCamera(CameraInterface):
     def _get_height(self):
         height = None
         if self.status == 'enabled':
-            height = self.__wb_camera.getHeight()
+            height = self.robot.camera.getHeight()
         else:
             logging.error("Camera is not started")
         return height
@@ -55,7 +53,7 @@ class WebotsCamera(CameraInterface):
     def _get_width(self):
         width = None
         if self.status == 'enabled':
-            width = self.__wb_camera.getWidth()
+            width = self.robot.camera.getWidth()
         else:
             logging.error("Camera is not started")
         return width

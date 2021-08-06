@@ -1,25 +1,21 @@
 from .servo_interface import ServoInterface
-from controller import PositionSensor, Motor
 
 
-class WebotsServo(ServoInterface):
+class ElsirosServo(ServoInterface):
     """[summary]
 
     Args:
         ServoInterface ([type]): [description]
     """
     def __init__(self, name, robot):
-        super().__init__(name)
+        self._name = name
         self.robot = robot
-        wb_device = None # IMPORT FROM CONTROLLER
-        self.__position_sensor = PositionSensor(name + '_sensor')
-        self.__position_sensor.enable(100)
-        self.__motor = Motor(name)
-
+        self.__posititon_sensor = self.robot.servos[self._name + '_sensor']
+        self.__motor = self.robot.servos[self._name]
 
     def start(self):
         try:
-            self.__position_sensor.enable(100)
+            self.__posititon_sensor.enable(100)
             self.__motor.enable()
         except:
             self._status = 'disabled'

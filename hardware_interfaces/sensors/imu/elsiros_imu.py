@@ -2,10 +2,9 @@
 # TODO: add config read
 import logging
 from .imu_interface import IMUSensorInterface
-from controller import InertialUnit
 
 
-class WebotsIMU(IMUSensorInterface):
+class ElsirosIMU(IMUSensorInterface):
     """[summary]
 
     Args:
@@ -16,14 +15,12 @@ class WebotsIMU(IMUSensorInterface):
         super().__init__(name)
         self.robot = robot
 
-        self.__in_unit = InertialUnit(self.name)
-
     def get_param(self, param_name):
         pass
 
     def start(self):
         try:
-            self.__in_unit.enable(100)
+            self.robot.imu.enable(100) # ?????
             self.status = 'enabled'
         except Exception as start_exception:
             self.status = 'disabled'
@@ -34,7 +31,7 @@ class WebotsIMU(IMUSensorInterface):
     def _get_orientation(self):
         orientation = None
         if self.status == 'enabled':
-            orientation = self.__in_unit.getRollPitchYaw()
+            orientation = self.robot.imu.getRollPitchYaw()
         else:
             logging.error("IMU is not started")
         return orientation

@@ -48,6 +48,7 @@ class PositionControllerInterface(ControllerInterface):
             servo_name, position = self._pos_queue.get()
             self.hardware_interfaces[servo_name].write(position)
 
+
     def set_position(self, servo_name, position):
         """[summary]
 

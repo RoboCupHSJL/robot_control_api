@@ -1,5 +1,5 @@
 # TODO: add docs
-# from controllers import WebotsPositionController
+from controllers import WebotsPositionController
 from controllers import WebotsImuController
 from controllers import WebotsCameraController
 
@@ -24,7 +24,7 @@ class ControllerManager:
         """
         self.controllers['imu'] = WebotsImuController('imu_controller',
                                                       robot)
-        #self.controllers['servos'] = WebotsPositionController('servos_controller', robot)
+        self.controllers['servos'] = WebotsPositionController('servos_controller', robot)
         self.controllers['camera'] = WebotsCameraController('camera_controller', robot)
 
     def __step(self):

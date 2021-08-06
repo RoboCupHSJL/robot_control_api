@@ -1,9 +1,9 @@
 # TODO: add docs
 from .camera_controller_interface import CameraControllerInterface
-from hardware_interfaces.sensors import WebotsCamera
+from hardware_interfaces.sensors import ElsirosCamera
 
 
-class WebotsCameraController(CameraControllerInterface):
+class ElsirosCameraController(CameraControllerInterface):
     """[summary]
 
     Args:
@@ -14,4 +14,4 @@ class WebotsCameraController(CameraControllerInterface):
 
         self.robot = robot
 
-        self._add_interface(WebotsCamera(name='camera', robot=robot))
+        self._add_interface(ElsirosCamera(name='camera', robot=robot))
