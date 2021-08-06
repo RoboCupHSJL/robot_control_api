@@ -1,4 +1,6 @@
-from .servo_interface import ServoInterface
+# TODO: add docs
+import logging
+from servo_interface import ServoInterface
 from controller import PositionSensor, Motor
 
 
@@ -10,30 +12,43 @@ class WebotsServo(ServoInterface):
     """
     def __init__(self, name, robot):
         super().__init__(name)
-        self.robot = robot
-        wb_device = None # IMPORT FROM CONTROLLER
+        self.__robot = robot
         self.__position_sensor = PositionSensor(name + '_sensor')
         self.__position_sensor.enable(100)
         self.__motor = Motor(name)
 
+    def get_param(self, param_name):
+        result = None
+        return result
 
     def start(self):
         try:
             self.__position_sensor.enable(100)
             self.__motor.enable()
-        except:
-            self._status = 'disabled'
-            return
+        except Exception as e:
+            self.status = 'disabled'
+            logging.error("Couldn't start servo interface %s. Exception is %s",
+                          self.name, e)
 
-        self._status = 'enabled'
+        self.status = 'enabled'
 
     def _get_position(self):
-        if self.__position_sensor:
-            return self.__position_sensor.getValue()
-        else:
-            return None
+        """[summary]
 
-    def _set_position(self, ang):
-        #ang = request.value
-        self.__motor.setPosition(ang)
-        return
+        Returns:
+            [type]: [description]
+        """
+        current_position = None
+        if self.status == 'enabled':
+            current_position = self.__position_sensor.getValue()
+        else:
+            logging.error("Servo interface %s is not enabled", self.name)
+        return current_position
+
+    def _set_position(self, goal_position):
+        """[summary]
+
+        Args:
+            ang ([type]): [description]
+        """
+        self.__motor.setPosition(goal_position)
