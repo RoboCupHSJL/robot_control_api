@@ -1,6 +1,6 @@
 # TODO: add docs
+from hardware_interfaces.actuators.servo.elsiros_servo import ElsirosServo
 from .position_controller_interface import PositionControllerInterface
-from hardware_interfaces.actuators import ElsirosServo
 
 
 class ElsirosPositionController(PositionControllerInterface):
@@ -9,10 +9,10 @@ class ElsirosPositionController(PositionControllerInterface):
     Args:
         PositionControllerInterface ([type]): [description]
     """
-    def __init__(self, name, robot):
-        super().__init__(name)
+    def __init__(self, config, agent):
+        super().__init__(config)
 
-        self.robot = robot
+        self.__agent = agent
 
         for servo_name in self._servo_id_list:
-            self._add_interface(ElsirosServo(servo_name, robot))
+            self._add_interface(ElsirosServo(servo_name, agent))

@@ -1,6 +1,6 @@
 # TODO: add docs
 from abc import abstractmethod
-from hardware_interfaces.actuators.actuator_interface import ActuatorInterface
+from hardware_interfaces.actuators import ActuatorInterface
 from messages import ServoMessage
 
 

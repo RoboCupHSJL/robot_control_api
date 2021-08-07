@@ -1,7 +1,7 @@
 # TODO: add docs
 # TODO: add config read
 import logging
-from .imu_interface import IMUSensorInterface
+from imu_interface import IMUSensorInterface
 
 
 class ElsirosIMU(IMUSensorInterface):

@@ -1,6 +1,6 @@
 # TODO: add docs
-from .imu_controller_interface import ImuControllerInterface
-from hardware_interfaces.sensors import ElsirosIMU
+from imu_controller_interface import ImuControllerInterface
+from hardware_interfaces.sensors.imu.elsiros_imu import ElsirosIMU
 
 
 class ElsirosImuController(ImuControllerInterface):

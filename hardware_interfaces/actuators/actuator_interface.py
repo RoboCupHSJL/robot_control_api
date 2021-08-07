@@ -1,6 +1,6 @@
 # TODO: add docs
 from abc import abstractmethod
-from hardware_interfaces.hardware_interface import HardwareInterface
+from hardware_interfaces import HardwareInterface
 
 
 class ActuatorInterface(HardwareInterface):

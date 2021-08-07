@@ -1,6 +1,6 @@
 # TODO: add docs
-from .imu_controller_interface import ImuControllerInterface
-from hardware_interfaces.sensors import WebotsIMU
+from imu_controller_interface import ImuControllerInterface
+from hardware_interfaces.sensors.imu.webots_imu import WebotsIMU
 
 
 class WebotsImuController(ImuControllerInterface):

@@ -1,4 +1,4 @@
-from .servo_interface import ServoInterface
+from servo_interface import ServoInterface
 
 
 class ElsirosServo(ServoInterface):

@@ -1,7 +1,7 @@
 # TODO: add docs
 # TODO: add config read
 import logging
-from .camera_interface import CameraInterface
+from camera_interface import CameraInterface
 
 
 class ElsirosCamera(CameraInterface):

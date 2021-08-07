@@ -1,6 +1,6 @@
 # TODO: add docs
+from hardware_interfaces.actuators.servo.webots_servo import WebotsServo
 from .position_controller_interface import PositionControllerInterface
-from hardware_interfaces.actuators import WebotsServo
 
 
 class WebotsPositionController(PositionControllerInterface):
@@ -9,10 +9,10 @@ class WebotsPositionController(PositionControllerInterface):
     Args:
         PositionControllerInterface ([type]): [description]
     """
-    def __init__(self, name, robot):
-        super().__init__(name)
+    def __init__(self, config, robot):
+        super().__init__(config)
 
         self.robot = robot
 
-        for servo_name in self._servo_id_list:
-            self._add_interface(WebotsServo(servo_name, robot))
+        for servo_config in self._servos.items():
+            self._add_interface(WebotsServo(servo_config, robot))
