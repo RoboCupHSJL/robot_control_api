@@ -1,10 +1,9 @@
 robot_control_api
 =================
-Hi!!!
 
 .. toctree::
    :maxdepth: 4
-
+   ../README.md
    controller_manager
    controllers
    hardware_interfaces
