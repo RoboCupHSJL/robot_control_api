@@ -22,9 +22,9 @@ print(os.getcwd())
 
 # -- Project information -----------------------------------------------------
 
-project = 'Kondo-Pro'
-copyright = '2020, Ivan'
-author = 'Ivan'
+project = 'Robot Control API'
+copyright = '2021, Starkit Team'
+author = 'Vladimir Litvinenko, Aleksandr Matsun and Ivan Khokhlov'
 
 # The full version, including alpha/beta/rc tags
 release = '0.0.1'
