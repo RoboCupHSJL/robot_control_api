@@ -9,10 +9,10 @@ class WebotsPositionController(PositionControllerInterface):
     Args:
         PositionControllerInterface ([type]): [description]
     """
-    def __init__(self, config, robot):
-        super().__init__(config)
+    def __init__(self, name, config, agent):
+        super().__init__(name, config)
 
-        self.robot = robot
+        self.agent = agent
 
         for servo_config in self._servos.items():
-            self._add_interface(WebotsServo(servo_config, robot))
+            self._add_interface(WebotsServo(servo_config[0], agent))

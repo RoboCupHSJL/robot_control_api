@@ -9,8 +9,8 @@ class PositionControllerInterface(ControllerInterface):
     Args:
         ControllerInterface ([type]): [description]
     """
-    def __init__(self, config):
-        super().__init__(config)
+    def __init__(self, name, config):
+        super().__init__(name)
         self._pos_queue = queue.Queue()
 
         self._servos = config.get('servos')

@@ -1,7 +1,7 @@
 # TODO: add docs
 # TODO: add config read
 import logging
-from camera_interface import CameraInterface
+from .camera_interface import CameraInterface
 from controller import Camera
 
 
@@ -12,9 +12,9 @@ class WebotsCamera(CameraInterface):
         CameraInterface ([type]): [description]
     """
 
-    def __init__(self, name, robot):
+    def __init__(self, name, agent):
         super().__init__(name)
-        self.robot = robot
+        self.agent = agent
 
         self.__wb_camera = Camera(self.name)
 

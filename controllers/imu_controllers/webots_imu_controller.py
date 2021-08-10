@@ -1,5 +1,5 @@
 # TODO: add docs
-from imu_controller_interface import ImuControllerInterface
+from .imu_controller_interface import ImuControllerInterface
 from hardware_interfaces.sensors.imu.webots_imu import WebotsIMU
 
 
@@ -9,9 +9,9 @@ class WebotsImuController(ImuControllerInterface):
     Args:
         ImuControllerInterface ([type]): [description]
     """
-    def __init__(self, name, robot):
+    def __init__(self, name, agent):
         super().__init__(name)
 
-        self.robot = robot
+        self.agent = agent
 
-        self._add_interface(WebotsIMU(name='imu', robot=robot))
+        self._add_interface(WebotsIMU(name='imu', agent=agent))

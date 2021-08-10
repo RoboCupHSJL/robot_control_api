@@ -12,9 +12,9 @@ class WebotsIMU(IMUSensorInterface):
         IMUSensorInterface ([type]): [description]
     """
 
-    def __init__(self, name, robot):
+    def __init__(self, name, agent):
         super().__init__(name)
-        self.robot = robot
+        self.agent = agent
 
         self.__in_unit = InertialUnit(self.name)
 

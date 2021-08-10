@@ -9,7 +9,7 @@ class ElsirosCameraController(CameraControllerInterface):
     Args:
         CameraControllerInterface ([type]): [description]
     """
-    def __init__(self, name, robot):
+    def __init__(self, name, agent):
         super().__init__(name)
 
-        self._add_interface(ElsirosCamera(name='camera', robot=robot))
+        self._add_interface(ElsirosCamera(name='camera', agent=agent))
