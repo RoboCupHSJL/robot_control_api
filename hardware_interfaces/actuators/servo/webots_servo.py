@@ -1,6 +1,6 @@
 # TODO: add docs
 import logging
-from servo_interface import ServoInterface
+from .servo_interface import ServoInterface
 from controller import PositionSensor, Motor
 
 
@@ -10,11 +10,11 @@ class WebotsServo(ServoInterface):
     Args:
         ServoInterface ([type]): [description]
     """
-    def __init__(self, name, robot):
+    def __init__(self, name, agent):
         super().__init__(name)
-        self.__robot = robot
+        self.__robot = agent
         self.__position_sensor = PositionSensor(name + '_sensor')
-        self.__position_sensor.enable(100)
+        #self.__position_sensor.enable(100)
         self.__motor = Motor(name)
 
     def get_param(self, param_name):
@@ -24,7 +24,7 @@ class WebotsServo(ServoInterface):
     def start(self):
         try:
             self.__position_sensor.enable(100)
-            self.__motor.enable()
+            #self.__motor.enable()
         except Exception as e:
             self.status = 'disabled'
             logging.error("Couldn't start servo interface %s. Exception is %s",

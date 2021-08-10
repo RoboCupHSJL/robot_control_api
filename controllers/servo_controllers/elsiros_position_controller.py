@@ -9,10 +9,10 @@ class ElsirosPositionController(PositionControllerInterface):
     Args:
         PositionControllerInterface ([type]): [description]
     """
-    def __init__(self, config, agent):
-        super().__init__(config)
+    def __init__(self, name, config, agent):
+        super().__init__(name, config)
 
         self.__agent = agent
 
-        for servo_name in self._servo_id_list:
-            self._add_interface(ElsirosServo(servo_name, agent))
+        for servo_config in self._servos.items():
+            self._add_interface(ElsirosServo(servo_config[0], agent))

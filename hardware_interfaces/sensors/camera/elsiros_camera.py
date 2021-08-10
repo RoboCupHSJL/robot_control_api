@@ -1,7 +1,7 @@
 # TODO: add docs
 # TODO: add config read
 import logging
-from camera_interface import CameraInterface
+from .camera_interface import CameraInterface
 
 
 class ElsirosCamera(CameraInterface):
@@ -11,9 +11,9 @@ class ElsirosCamera(CameraInterface):
         CameraInterface ([type]): [description]
     """
 
-    def __init__(self, name, robot):
+    def __init__(self, name, agent):
         super().__init__(name)
-        self.robot = robot
+        self.agent = agent
 
 
     def get_param(self, param_name):
@@ -28,7 +28,6 @@ class ElsirosCamera(CameraInterface):
 
     def start(self):
         try:
-            self.robot.camera.enable(100)
             self.status = 'enabled'
         except Exception as start_exception:
             self.status = 'disabled'
@@ -37,7 +36,7 @@ class ElsirosCamera(CameraInterface):
     def _get_image(self):
         image = None
         if self.status == 'enabled':
-            image = self.robot.camera.getImage()
+            self.agent.get_image()
         else:
             logging.error("Camera is not started")
         return image
@@ -45,7 +44,7 @@ class ElsirosCamera(CameraInterface):
     def _get_height(self):
         height = None
         if self.status == 'enabled':
-            height = self.robot.camera.getHeight()
+            self.agent.get_height()
         else:
             logging.error("Camera is not started")
         return height
@@ -53,7 +52,7 @@ class ElsirosCamera(CameraInterface):
     def _get_width(self):
         width = None
         if self.status == 'enabled':
-            width = self.robot.camera.getWidth()
+            self.agent.get_width()
         else:
             logging.error("Camera is not started")
         return width

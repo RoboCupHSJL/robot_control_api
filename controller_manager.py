@@ -33,6 +33,8 @@ else:
 
 CONTROL_MODE = control_config.get('mode')
 
+#print(control_config.get('servo_controller').get('servos').items())
+
 assert isinstance(CONTROL_MODE, str), "mode should be a string"
 
 # =============================================================================
@@ -71,32 +73,38 @@ class ControllerManager:
             self.__agent = ElsirosCommunicator()
             self.__init_elsiros(self.__agent)
 
-    def __init_webots(self, robot):
+    def __init_webots(self, agent):
         """[summary]
 
         Args:
             robot ([type]): [description]
         """
-        self.controllers['imu'] = WebotsImuController('imu_controller', robot)
-        self.controllers['servos'] = WebotsPositionController('servos_controller', robot)
-        self.controllers['camera'] = WebotsCameraController('camera_controller', robot)
+        self.controllers['imu'] = WebotsImuController('imu_controller', agent)
+        self.controllers['servos'] = WebotsPositionController('servo_controller', 
+                                                              control_config.get('servo_controller'), 
+                                                              agent)
+        self.controllers['camera'] = WebotsCameraController('camera_controller', agent)
 
-    def __init_elsiros(self, robot):
+    def __init_elsiros(self, agent):
         """[summary]
 
         Args:
             robot ([type]): [description]
         """
-        self.controllers['imu'] = ElsirosImuController('imu_controller', robot)
-        self.controllers['servos'] = ElsirosPositionController('servos_controller', robot)
-        self.controllers['camera'] = ElsirosCameraController('camera_controller', robot)
+        self.controllers['imu'] = ElsirosImuController('imu_controller', agent)
+        self.controllers['servos'] = ElsirosPositionController('servos_controller', 
+                                                               control_config.get('servo_controller'), 
+                                                               agent)
+        self.controllers['camera'] = ElsirosCameraController('camera_controller', agent)
 
     def __step(self):
         """[summary]
         """
         for controller in self.controllers:
             self.controllers[controller].step()
-        if self.__agent is not None and self.__agent.__hasattr__("step"):
+        #if self.__agent is not None and self.__agent.__hasattr__("step"):
+        #    self.__agent.step(control_config.get("agent_rate"))
+        if self.__agent is not None and hasattr(self.__agent, "step"):
             self.__agent.step(control_config.get("agent_rate"))
 
     def start(self):

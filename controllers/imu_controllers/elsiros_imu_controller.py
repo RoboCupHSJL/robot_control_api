@@ -1,5 +1,5 @@
 # TODO: add docs
-from imu_controller_interface import ImuControllerInterface
+from .imu_controller_interface import ImuControllerInterface
 from hardware_interfaces.sensors.imu.elsiros_imu import ElsirosIMU
 
 
@@ -9,9 +9,9 @@ class ElsirosImuController(ImuControllerInterface):
     Args:
         ImuControllerInterface ([type]): [description]
     """
-    def __init__(self, name, robot):
+    def __init__(self, name, agent):
         super().__init__(name)
 
-        self.robot = robot
+        self.agent = agent
 
-        self._add_interface(ElsirosIMU(name='imu', robot=robot))
+        self._add_interface(ElsirosIMU(name='imu', agent=agent))
