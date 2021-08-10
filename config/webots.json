@@ -1,5 +1,5 @@
 {
-    "mode": "elsiros",
+    "mode": "webots",
     "agent_rate": 100,
 
     "imu_controller": 
