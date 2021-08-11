@@ -36,7 +36,7 @@ class ElsirosCamera(CameraInterface):
     def _get_image(self):
         image = None
         if self.status == 'enabled':
-            self.agent.get_image()
+            self.agent.get_data(self.__name)['image']
         else:
             logging.error("Camera is not started")
         return image
@@ -44,7 +44,7 @@ class ElsirosCamera(CameraInterface):
     def _get_height(self):
         height = None
         if self.status == 'enabled':
-            self.agent.get_height()
+            self.agent.get_data(self.__name)['height']
         else:
             logging.error("Camera is not started")
         return height
@@ -52,7 +52,7 @@ class ElsirosCamera(CameraInterface):
     def _get_width(self):
         width = None
         if self.status == 'enabled':
-            self.agent.get_width()
+            self.agent.get_data(self.__name)['width']
         else:
             logging.error("Camera is not started")
         return width

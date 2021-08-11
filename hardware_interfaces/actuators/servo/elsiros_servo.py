@@ -23,12 +23,12 @@ class ElsirosServo(ServoInterface):
 
     def _get_position(self):
         try:
-            self.agent.get_position()
+            self.agent.get_data(self.__name)
         except:
             return None
 
     def _set_position(self, ang):
         try:
-            self.agent._set_position(ang)
+            self.agent.set_position(self.__name, ang)
         except:
             return None
