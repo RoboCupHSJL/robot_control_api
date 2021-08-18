@@ -1,32 +1,26 @@
-
+from elsiros_communication import CommunicationManager
 
 class ElsirosCommunicator:
     def __init__(self):
-        pass
+        self.cm = CommunicationManager()
+        self.frame = {}
+        self.__enabled = False
 
-    def get_pitch_roll_yaw(self):
-        print('get_pitch_roll_yaw called')
+    def enable(self):
+        self.__enabled = True
 
-    def get_position(self):
-        print('get_position called')
+    def start(self, sensors):
+        assert self.__enabled, "communicator is not enabled"
+        self.cm.enable_sensors(sensors)
 
-    def set_position(self, val):
-        print('set_position called, value=', val)
+    def step(self):
+        assert self.__enabled, "communicator is not enabled"
+        self.cm.add_to_queue(self.frame)
 
-    def get_image(self):
-        print('get_image called')
+    def set_position(self, name, value):
+        assert self.__enabled, "communicator is not enabled"
+        self.frame[name] = value
 
-    def get_ball_on_image(self):
-        print('get_ball_on_image called')
-
-    def get_robots_on_image(self):
-        print('get_robots_on_image called')
-
-    def get_goals_on_image(self):
-        print('get_goals_on_image called')
-
-    def get_height(self):
-        print('get_height called')
-
-    def get_width(self):
-        print('get_width called')
+    def get_data(self, name):
+        assert self.__enabled, "communicator is not enabled"
+        return self.cm.get_sensor(name)

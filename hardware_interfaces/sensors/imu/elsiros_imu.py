@@ -30,7 +30,7 @@ class ElsirosIMU(IMUSensorInterface):
     def _get_orientation(self):
         orientation = None
         if self.status == 'enabled':
-            self.agent.get_pitch_roll_yaw()
+            self.agent.get_data(self.__name)
         else:
             logging.error("IMU is not started")
         return orientation
