@@ -40,23 +40,7 @@ assert isinstance(CONTROL_MODE, str), "mode should be a string"
 # =============================================================================
 # =============================================================================
 
-# write here nessesary imports for the control mode
-if CONTROL_MODE == 'webots':
-    from controllers.servo_controllers.webots_position_controller \
-        import WebotsPositionController
-    from controllers.imu_controllers.webots_imu_controller \
-        import WebotsImuController
-    from controllers.camera_controllers.webots_camera_controller \
-        import WebotsCameraController
-    from controller import Robot
-elif CONTROL_MODE == 'elsiros':
-    from controllers.servo_controllers.elsiros_position_controller \
-        import ElsirosPositionController
-    from controllers.camera_controllers.elsiros_camera_controller \
-        import ElsirosCameraController
-    from controllers.imu_controllers.elsiros_imu_controller \
-        import ElsirosImuController
-    from elsiros_communicator import ElsirosCommunicator
+from factory_constructor import FactoryConstructor
 
 
 class ControllerManager:
@@ -66,36 +50,13 @@ class ControllerManager:
         self.controllers = {}
         self.__agent = None
         self.__running = False
-        if CONTROL_MODE == 'webots':
-            self.__agent = Robot()
-            self.__init_webots(self.__agent)
-        elif CONTROL_MODE == 'elsiros':
-            self.__agent = ElsirosCommunicator()
-            self.__init_elsiros(self.__agent)
 
-    def __init_webots(self, agent):
-        """[summary]
+        FC = FactoryConstructor(control_config, CONTROL_MODE)
 
-        Args:
-            robot ([type]): [description]
-        """
-        self.controllers['imu'] = WebotsImuController('imu_controller', agent)
-        self.controllers['servos'] = WebotsPositionController('servo_controller', 
-                                                              control_config.get('servo_controller'), 
-                                                              agent)
-        self.controllers['camera'] = WebotsCameraController('camera_controller', agent)
-
-    def __init_elsiros(self, agent):
-        """[summary]
-
-        Args:
-            robot ([type]): [description]
-        """
-        self.controllers['imu'] = ElsirosImuController('imu_controller', agent)
-        self.controllers['servos'] = ElsirosPositionController('servos_controller', 
-                                                               control_config.get('servo_controller'), 
-                                                               agent)
-        self.controllers['camera'] = ElsirosCameraController('camera_controller', agent)
+        self.__agent = FC.agent
+        self.controllers['imu'] = FC.controllers['imu']
+        self.controllers['servos'] = FC.controllers['servos']
+        self.controllers['camera'] = FC.controllers['camera']
 
     def __step(self):
         """[summary]
