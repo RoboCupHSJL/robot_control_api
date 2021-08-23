@@ -29,6 +29,7 @@ class ElsirosCamera(CameraInterface):
     def start(self):
         try:
             self.status = 'enabled'
+            self.agent.sensors[self.name] = 100
         except Exception as start_exception:
             self.status = 'disabled'
             logging.error(start_exception)
@@ -36,25 +37,25 @@ class ElsirosCamera(CameraInterface):
     def _get_image(self):
         image = None
         if self.status == 'enabled':
-            self.agent.get_data(self.__name)['image']
+            image = self.agent.get_data(self.name)
         else:
             logging.error("Camera is not started")
         return image
 
     def _get_height(self):
-        height = None
-        if self.status == 'enabled':
-            self.agent.get_data(self.__name)['height']
-        else:
-            logging.error("Camera is not started")
+        height = 240
+        ##if self.status == 'enabled':
+        #    self.agent.get_data(self.name)['height']
+        #else:
+        #    logging.error("Camera is not started")
         return height
 
     def _get_width(self):
-        width = None
-        if self.status == 'enabled':
-            self.agent.get_data(self.__name)['width']
-        else:
-            logging.error("Camera is not started")
+        width = 320
+        #if self.status == 'enabled':
+        #    self.agent.get_data(self.name)['width']
+        #else:
+        #    logging.error("Camera is not started")
         return width
 
     def _get_encoding(self):

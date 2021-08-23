@@ -20,6 +20,7 @@ class FactoryConstructor:
         else:
             # IMPORT AND ASSIGNMENT OF THE CUSTOM AGENT 
             pass
+        self.agent.enable()
 
         self.controllers['imu'] = GeneralImuController('imu_controller', self.agent, mode)
         self.controllers['servos'] = GeneralPositionController('servo_controller', 

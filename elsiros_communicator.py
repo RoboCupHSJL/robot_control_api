@@ -1,19 +1,22 @@
-from elsiros_communication import CommunicationManager
+from elsiros_webots.controllers.player.elsiros_communication import CommunicationManager
 
 class ElsirosCommunicator:
     def __init__(self):
         self.cm = CommunicationManager()
         self.frame = {}
         self.__enabled = False
+        self.sensors = {}
 
     def enable(self):
         self.__enabled = True
 
-    def start(self, sensors):
+    def start(self):
         assert self.__enabled, "communicator is not enabled"
-        self.cm.enable_sensors(sensors)
+        self.cm.enable_sensors(self.sensors)
+        print(self.sensors)
+        self.cm.execute()
 
-    def step(self):
+    def step(self, rate):
         assert self.__enabled, "communicator is not enabled"
         self.cm.add_to_queue(self.frame)
 

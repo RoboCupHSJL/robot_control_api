@@ -17,7 +17,8 @@ class GeneralImuController(ImuControllerInterface):
         if mode == 'webots':
             self._add_interface(WebotsIMU(name='imu', agent=agent))
         elif mode == 'elsiros':
-            self._add_interface(ElsirosIMU(name='imu', agent=agent))
+            self._add_interface(ElsirosIMU(name='imu_head', agent=agent))
+            self._add_interface(ElsirosIMU(name='imu_body', agent=agent))
         else:
             # ADDITION OF CUSTOM HARDWARE INTERFACE
             pass

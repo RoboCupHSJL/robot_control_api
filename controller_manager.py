@@ -74,6 +74,7 @@ class ControllerManager:
         self.__running = True
         for controller in self.controllers:
             self.controllers[controller].start()
+        self.__agent.start()
         while self.__running:
             self.__step()
 
