@@ -1,10 +1,15 @@
 {
-    "mode": "webots",
+    "mode": "elsiros",
     "agent_rate": 100,
 
     "imu_controller": 
     {
-        "rate": 100
+        "rate": 100,
+        "imus":
+        {
+            "imu_head": {},
+            "imu_body": {}
+        }
     },
     
     "servo_controller": 
@@ -18,14 +23,10 @@
             "left_shoulder_roll": {},
             "left_shoulder_twirl": {},
             "left_elbow_pitch": {},
-            "left_hand_twirl": {},
-            "left_finger_pitch": {},
             "right_shoulder_pitch": {},
             "right_shoulder_roll": {},
             "right_shoulder_twirl": {},
             "right_elbow_pitch": {},
-            "right_hand_twirl": {},
-            "right_finger_pitch": {},
             "pelvis_yaw": {},
             "left_hip_yaw": {},
             "left_hip_roll": {},
@@ -44,6 +45,10 @@
     
     "camera_controller": 
     {
-        "rate": 100
+        "rate": 100,
+        "cameras":
+        {
+            "camera": {}
+        }
     }
 }

@@ -16,16 +16,19 @@ class ElsirosServo(ServoInterface):
     def start(self):
         try:
             self._status = 'enabled'
+            self.agent.sensors[self.name] = 100
         except:
             self._status = 'disabled'
             return
 
 
     def _get_position(self):
+        position = None
         try:
-            self.agent.get_data(self.__name)
+            position = self.agent.get_data(self.__name)
         except:
-            return None
+            pass
+        return position
 
     def _set_position(self, ang):
         try:
