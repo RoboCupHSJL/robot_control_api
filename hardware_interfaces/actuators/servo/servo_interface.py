@@ -7,6 +7,9 @@ from messages import ServoMessage
 class ServoInterface(ActuatorInterface):
     """[summary]
     """
+    def __init__(self, name, config, clock):
+        super().__init__(name, clock)
+        self.config = config
 
     @abstractmethod
     def _get_position(self):

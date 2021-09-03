@@ -8,9 +8,10 @@ class ControllerInterface:
     """
     __metaclass__ = ABCMeta
 
-    def __init__(self, name):
+    def __init__(self, name, clock):
         self.__name__ = name
         self.hardware_interfaces = {}
+        self._clock = clock
 
     @abstractmethod
     def step(self):

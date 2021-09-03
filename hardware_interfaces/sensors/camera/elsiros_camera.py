@@ -11,8 +11,8 @@ class ElsirosCamera(CameraInterface):
         CameraInterface ([type]): [description]
     """
 
-    def __init__(self, name, agent):
-        super().__init__(name)
+    def __init__(self, name, agent, config, clock):
+        super().__init__(name, config, clock)
         self.agent = agent
 
 

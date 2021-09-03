@@ -5,6 +5,8 @@ from controllers.imu_controllers.factory_imu_controller \
 from controllers.servo_controllers.factory_position_controller \
     import GeneralPositionController
 
+from clock_interface import ClockInterface
+
 class FactoryConstructor:
     def __init__(self, control_config, mode):
         self.controllers = {}
@@ -22,12 +24,23 @@ class FactoryConstructor:
             pass
         self.agent.enable()
 
-        self.controllers['imu'] = GeneralImuController('imu_controller', self.agent, mode)
+        clock = ClockInterface(mode, self.agent)
+
+        self.controllers['imu'] = GeneralImuController('imu_controller', 
+                                                       self.agent, 
+                                                       mode,
+                                                       control_config,
+                                                       clock)
         self.controllers['servos'] = GeneralPositionController('servo_controller', 
-                                                               control_config.get('servo_controller'), 
                                                                self.agent,
-                                                               mode)
-        self.controllers['camera'] = GeneralCameraController('camera_controller', self.agent, mode)
+                                                               mode, 
+                                                               control_config,
+                                                               clock)
+        self.controllers['camera'] = GeneralCameraController('camera_controller', 
+                                                             self.agent, 
+                                                             mode,
+                                                             control_config,
+                                                             clock)
             
         
 

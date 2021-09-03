@@ -11,8 +11,8 @@ class ElsirosIMU(IMUSensorInterface):
         IMUSensorInterface ([type]): [description]
     """
 
-    def __init__(self, name, agent):
-        super().__init__(name)
+    def __init__(self, name, agent, config, clock):
+        super().__init__(name, config, clock)
         self.agent = agent
 
     def get_param(self, param_name):

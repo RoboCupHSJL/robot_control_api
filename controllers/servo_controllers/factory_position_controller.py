@@ -10,17 +10,17 @@ class GeneralPositionController(PositionControllerInterface):
     Args:
         PositionControllerInterface ([type]): [description]
     """
-    def __init__(self, name, config, agent, mode):
-        super().__init__(name, config)
+    def __init__(self, name, agent, mode, config, clock):
+        super().__init__(name, config, clock)
 
         self.agent = agent
 
         if mode == 'webots':
             for servo_config in self._servos.items():
-                self._add_interface(WebotsServo(servo_config[0], agent))
+                self._add_interface(WebotsServo(servo_config[0], agent, config, clock))
         elif mode == 'elsiros':
             for servo_config in self._servos.items():
-                self._add_interface(ElsirosServo(servo_config[0], agent))
+                self._add_interface(ElsirosServo(servo_config[0], agent, config, clock))
         else:
             # ADDITION OF CUSTOM HRDWARE INTERFACE
             pass

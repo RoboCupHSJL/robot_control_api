@@ -9,15 +9,15 @@ class GeneralCameraController(CameraControllerInterface):
     Args:
         PositionControllerInterface ([type]): [description]
     """
-    def __init__(self, name, agent, mode):
-        super().__init__(name)
+    def __init__(self, name, agent, mode, config, clock):
+        super().__init__(name, clock)
 
         self.agent = agent
 
         if mode == 'webots':
-            self._add_interface(WebotsCamera(name='camera', agent=agent))
+            self._add_interface(WebotsCamera(name='camera', agent=agent, config=config, clock=clock))
         elif mode == 'elsiros':
-            self._add_interface(ElsirosCamera(name='camera', agent=agent))
+            self._add_interface(ElsirosCamera(name='camera', agent=agent, config=config, clock=clock))
         else:
             # ADDITION OF CUSTOM HARDWARE INTERFACE
             pass

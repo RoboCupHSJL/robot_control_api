@@ -7,13 +7,14 @@ class HardwareInterface:
     """
     __metaclass__ = ABCMeta
 
-    def __init__(self, name):
+    def __init__(self, name, clock):
 
         """[summary]
         """
         self.__name = name
         self.__interface_type = type(self)
         self.__status = 'disabled'
+        self._clock = clock
 
     @abstractmethod
     def get_param(self, param_name):
