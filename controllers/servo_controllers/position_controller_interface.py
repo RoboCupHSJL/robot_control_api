@@ -1,7 +1,7 @@
 # TODO: add docs
 import queue
 from controllers import ControllerInterface
-from global_ import interactor
+from communication import interactor
 
 
 class PositionControllerInterface(ControllerInterface):
@@ -20,12 +20,12 @@ class PositionControllerInterface(ControllerInterface):
         """[summary]
         """
         for servo in self.hardware_interfaces.values():
-            interactor[servo.name] = servo.read()
+            interactor.push_message(servo.name, servo.read())
         #if not self._pos_queue.empty():
         #    servo_name, position = self._pos_queue.get()
         #    self.hardware_interfaces[servo_name].write(position)
-        if not interactor.cmd_empty:
-            cmd_msg = interactor.get_message('servo_cmd')
+        cmd_msg = interactor.get_message('servo_cmd')
+        if cmd_msg is not None:
             for servo_name, value in cmd_msg.frame.items():
                 if servo_name in self.hardware_interfaces:
                     self.hardware_interfaces[servo_name].write(value)

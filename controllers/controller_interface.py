@@ -1,14 +1,12 @@
 # TODO: add docs
 from abc import ABCMeta, abstractmethod
 import logging
-from global_ import interactor
-
+from communication import interactor
 
 class ControllerInterface:
     """[summary]
     """
     __metaclass__ = ABCMeta
-
     def __init__(self, name, clock):
         self.__name__ = name
         self.hardware_interfaces = {}

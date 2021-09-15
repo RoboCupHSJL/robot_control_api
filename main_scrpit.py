@@ -1,7 +1,7 @@
 from controller_manager import ControllerManager
 from controller import Robot
 from messages.servo_cmd_message import ServoCmdMessage
-from global_ import interactor
+from communication import interactor
 
 
 kondo_webots_cm = ControllerManager()

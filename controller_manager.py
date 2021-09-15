@@ -41,8 +41,7 @@ assert isinstance(CONTROL_MODE, str), "mode should be a string"
 # =============================================================================
 
 from factory_constructor import FactoryConstructor
-from global_ import interactor
-
+from communication import interactor
 
 class ControllerManager:
     """[summary]

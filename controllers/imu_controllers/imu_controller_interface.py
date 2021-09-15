@@ -1,6 +1,6 @@
 # TODO: add docs
 from controllers import ControllerInterface
-from global_ import interactor
+from communication import interactor
 
 
 class ImuControllerInterface(ControllerInterface):
@@ -13,4 +13,4 @@ class ImuControllerInterface(ControllerInterface):
         """[summary]
         """
         for imu in self.hardware_interfaces.values():
-            interactor[imu.name] = imu.read()
+            interactor.push_message(imu.name, imu.read())
