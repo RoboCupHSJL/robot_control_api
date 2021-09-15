@@ -1,0 +1,4 @@
+{
+    "control_config_file": "webots.json",
+    "logging_level": "DEBUG"
+}
