@@ -10,8 +10,8 @@ class WebotsServo(ServoInterface):
     Args:
         ServoInterface ([type]): [description]
     """
-    def __init__(self, name, agent):
-        super().__init__(name)
+    def __init__(self, name, agent, config, clock):
+        super().__init__(name, config, clock)
         self.__robot = agent
         self.__position_sensor = PositionSensor(name + '_sensor')
         #self.__position_sensor.enable(100)

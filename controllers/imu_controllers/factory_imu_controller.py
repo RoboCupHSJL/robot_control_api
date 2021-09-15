@@ -7,18 +7,18 @@ class GeneralImuController(ImuControllerInterface):
     """[summary]
 
     Args:
-        PositionControllerInterface ([type]): [description]
+        ImuControllerInterface ([type]): [description]
     """
-    def __init__(self, name, agent, mode):
-        super().__init__(name)
+    def __init__(self, name, agent, mode, config, clock):
+        super().__init__(name, clock)
 
         self.agent = agent
 
         if mode == 'webots':
-            self._add_interface(WebotsIMU(name='imu', agent=agent))
+            self._add_interface(WebotsIMU(name='imu', agent=agent, config=config))
         elif mode == 'elsiros':
-            self._add_interface(ElsirosIMU(name='imu_head', agent=agent))
-            self._add_interface(ElsirosIMU(name='imu_body', agent=agent))
+            self._add_interface(ElsirosIMU(name='imu_head', agent=agent, config=config, clock=clock))
+            self._add_interface(ElsirosIMU(name='imu_body', agent=agent, config=config, clock=clock))
         else:
             # ADDITION OF CUSTOM HARDWARE INTERFACE
             pass

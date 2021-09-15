@@ -9,11 +9,11 @@ class PositionControllerInterface(ControllerInterface):
     Args:
         ControllerInterface ([type]): [description]
     """
-    def __init__(self, name, config):
-        super().__init__(name)
+    def __init__(self, name, config, clock):
+        super().__init__(name, clock)
         self._pos_queue = queue.Queue()
 
-        self._servos = config.get('servos')
+        self._servos = config.get('servo_controller').get('servos')
 
     def step(self):
         """[summary]

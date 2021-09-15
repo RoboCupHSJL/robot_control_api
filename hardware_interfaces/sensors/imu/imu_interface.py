@@ -7,6 +7,9 @@ from messages import IMUMessage
 class IMUSensorInterface(SensorInterface):
     """[summary]
     """
+    def __init__(self, name, config, clock):
+        super().__init__(name, clock)
+        self.config = config
 
     @abstractmethod
     def _get_orientation(self):

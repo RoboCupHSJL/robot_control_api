@@ -7,8 +7,8 @@ class ElsirosServo(ServoInterface):
     Args:
         ServoInterface ([type]): [description]
     """
-    def __init__(self, name, agent):
-        super().__init__(name)
+    def __init__(self, name, agent, config, clock):
+        super().__init__(name, config, clock)
         self.agent = agent
         #self.__posititon_sensor = self.robot.servos[self._name + '_sensor']
         #self.__motor = self.robot.servos[self._name]
