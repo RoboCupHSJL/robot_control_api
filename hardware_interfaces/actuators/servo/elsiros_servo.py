@@ -1,4 +1,5 @@
 from .servo_interface import ServoInterface
+import logging
 
 
 class ElsirosServo(ServoInterface):
@@ -24,10 +25,11 @@ class ElsirosServo(ServoInterface):
 
     def _get_position(self):
         position = None
-        try:
+        if self.status == 'enabled':
             position = self.agent.get_data(self.__name)
-        except:
-            pass
+            #logging.debug(position)
+        else:
+            logging.error(self.name, " servo is not started")
         return position
 
     def _set_position(self, ang):

@@ -1,10 +1,15 @@
 from controller_manager import ControllerManager
 from controller import Robot
+from messages.servo_cmd_message import ServoCmdMessage
+from global_ import interactor
 
 
 kondo_webots_cm = ControllerManager()
-kondo_webots_cm.controllers['servos'].set_position('head_yaw', -0.5)
-kondo_webots_cm.controllers['servos'].set_position('head_pitch', 0.5)
+cmd_msg = ServoCmdMessage()
+cmd_msg.frame = {'head_yaw' : -0.5,
+                 'head_pitch' : 0.5}
+
+interactor.push_message('servo_cmd', cmd_msg)
 
 kondo_webots_cm.start()
 

@@ -41,7 +41,7 @@ assert isinstance(CONTROL_MODE, str), "mode should be a string"
 # =============================================================================
 
 from factory_constructor import FactoryConstructor
-
+from global_ import interactor
 
 
 class ControllerManager:
@@ -75,9 +75,12 @@ class ControllerManager:
         self.__running = True
         for controller in self.controllers:
             self.controllers[controller].start()
-        self.__agent.start()
+        if self.__agent is not None and hasattr(self.__agent, "start"):
+            self.__agent.start()
+        
         while self.__running:
             self.__step()
+            #print(interactor.topic_list)           
 
     def stop(self):
         """[summary]

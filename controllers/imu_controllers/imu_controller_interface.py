@@ -1,5 +1,6 @@
 # TODO: add docs
 from controllers import ControllerInterface
+from global_ import interactor
 
 
 class ImuControllerInterface(ControllerInterface):
@@ -12,4 +13,4 @@ class ImuControllerInterface(ControllerInterface):
         """[summary]
         """
         for imu in self.hardware_interfaces.values():
-            imu.read()
+            interactor[imu.name] = imu.read()
