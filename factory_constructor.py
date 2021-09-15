@@ -19,10 +19,11 @@ class FactoryConstructor:
         elif mode == 'elsiros':
             from elsiros_communicator import ElsirosCommunicator
             self.agent = ElsirosCommunicator()
+            self.agent.enable()
         else:
             # IMPORT AND ASSIGNMENT OF THE CUSTOM AGENT 
             pass
-        self.agent.enable()
+        #self.agent.enable()
 
         clock = ClockInterface(mode, self.agent)
 

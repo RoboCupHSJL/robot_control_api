@@ -1,5 +1,6 @@
 # TODO: add docs
 from controllers import ControllerInterface
+from global_ import interactor
 
 
 class CameraControllerInterface(ControllerInterface):
@@ -12,4 +13,4 @@ class CameraControllerInterface(ControllerInterface):
         """[summary]
         """
         for camera in self.hardware_interfaces.values():
-            camera.read()
+            interactor[camera.name] = camera.read()

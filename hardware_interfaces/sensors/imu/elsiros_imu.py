@@ -32,7 +32,7 @@ class ElsirosIMU(IMUSensorInterface):
         orientation = None
         if self.status == 'enabled':
             orientation = self.agent.get_data(self.name)
-            logging.debug(orientation)
+            #logging.debug(orientation)
         else:
             logging.error("IMU is not started")
         return orientation
