@@ -40,7 +40,7 @@ assert isinstance(CONTROL_MODE, str), "mode should be a string"
 # =============================================================================
 # =============================================================================
 
-from factory_constructor import FactoryConstructor
+from factory.factory_constructor import FactoryConstructor
 
 
 
