@@ -78,8 +78,7 @@ class ControllerManager:
             self.__agent.start()
         
         while self.__running:
-            self.__step()
-            #print(interactor.topic_list)           
+            self.__step()     
 
     def stop(self):
         """[summary]

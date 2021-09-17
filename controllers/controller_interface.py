@@ -42,7 +42,6 @@ class ControllerInterface:
             hw (HardwareInterface): [description]
         """
         self.hardware_interfaces[hardware_interface.name] = hardware_interface
-        interactor[hardware_interface.name] = None
         logging.info("Added interface %s, type of %s ",
                      hardware_interface.name,
                      type(hardware_interface))
