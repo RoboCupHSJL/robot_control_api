@@ -1,5 +1,5 @@
 {
-    "mode": "webots",
+    "mode": "test",
     "agent_rate": 100,
 
     "imu_controller": 
@@ -14,9 +14,9 @@
 
     "hw_interface":
     {
-        "servo": "WebotsServo",
-        "imu": "WebotsIMU",
-        "camera": "WebotsCamera"
+        "servo": "/hardware_interfaces/actuators/servo/test_servo/TestServo",
+        "camera": "/hardware_interfaces/sensors/camera/test_camera/TestCamera",
+        "imu": "/hardware_interfaces/sensors/imu/test_imu/TestIMU"
     },
     
     "servo_controller": 

@@ -6,6 +6,7 @@ from controllers.servo_controllers.factory_position_controller \
     import GeneralPositionController
 
 from clock_interface import ClockInterface
+from config_parser import ConfigParser
 
 class FactoryConstructor:
     def __init__(self, control_config, mode):
@@ -20,26 +21,36 @@ class FactoryConstructor:
             from elsiros_communicator import ElsirosCommunicator
             self.agent = ElsirosCommunicator()
             self.agent.enable()
+        elif mode == 'test':
+            self.agent = None
         else:
             # IMPORT AND ASSIGNMENT OF THE CUSTOM AGENT 
             pass
-        #self.agent.enable()
 
         clock = ClockInterface(mode, self.agent)
+        config_p = ConfigParser(control_config)
+        print('============================================')
+        print(config_p.imu_class)
+        print(config_p.servo_class)
+        print(config_p.camera_class)
+
 
         self.controllers['imu'] = GeneralImuController('imu_controller', 
-                                                       self.agent, 
+                                                       self.agent,
                                                        mode,
+                                                       config_p.imu_class,
                                                        control_config,
                                                        clock)
         self.controllers['servos'] = GeneralPositionController('servo_controller', 
                                                                self.agent,
-                                                               mode, 
+                                                               mode,
+                                                               config_p.servo_class, 
                                                                control_config,
                                                                clock)
         self.controllers['camera'] = GeneralCameraController('camera_controller', 
                                                              self.agent, 
                                                              mode,
+                                                             config_p.camera_class,
                                                              control_config,
                                                              clock)
             
